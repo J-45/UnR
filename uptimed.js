@@ -71,8 +71,9 @@ while (true) {
 })();
 
 function sendNofication(URL, TEXT, lastNotification) {
-    
-    let txt = `${lastNotification} = '${TEXT}' not found in '${URL}'`;
+    const DATE = new Date(lastNotification).toLocaleDateString("fr-FR");
+    const TIME = new Date(lastNotification).toLocaleTimeString("fr-FR");
+    let txt = `${DATE} - ${TIME} = '${TEXT}' not found in '${URL}'`;
     var data = JSON.stringify({
         'user': "", 'pass': "", 'msg': txt
     });
@@ -84,7 +85,6 @@ function sendNofication(URL, TEXT, lastNotification) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        //   'Content-Length': data.length
         }
     }
 
@@ -102,5 +102,5 @@ function sendNofication(URL, TEXT, lastNotification) {
     req.write(data);
     req.end();
 
-    console.log(`Sent >>> ${txt}`);
+    console.log(`\nSent >>> ${txt}`);
 }
